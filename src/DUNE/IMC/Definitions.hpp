@@ -9628,7 +9628,11 @@ namespace DUNE
         //! Counter-Clockwise loiter.
         FL_CCLOCKW = 0x10,
         //! Loiter from current position.
-        FL_LOITER_CURR = 0x20
+        FL_LOITER_CURR = 0x20,
+        //! Takeoff.
+        FL_TAKEOFF = 0x20,
+        //! Land.
+        FL_LAND = 0x20
       };
 
       //! Start Point -- Latitude WGS-84.
@@ -12867,6 +12871,228 @@ namespace DUNE
       getVariableSerializationSize(void) const
       {
         return reference.getSerializationSize();
+      }
+
+      void
+      fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
+
+    protected:
+      void
+      setTimeStampNested(double value__);
+
+      void
+      setSourceNested(uint16_t value__);
+
+      void
+      setSourceEntityNested(uint8_t value__);
+
+      void
+      setDestinationNested(uint16_t value__);
+
+      void
+      setDestinationEntityNested(uint8_t value__);
+    };
+
+    //! Relative State.
+    class RelativeState: public Message
+    {
+    public:
+      //! System Identifier.
+      std::string sid;
+      //! Distance.
+      fp32_t dist;
+      //! Position Error.
+      fp32_t err;
+      //! Control Importance.
+      fp32_t ctrlimp;
+      //! Relative Direction X (North).
+      fp32_t reldirx;
+      //! Relative Direction Y (East).
+      fp32_t reldiry;
+      //! Relative Direction Z (Down).
+      fp32_t reldirz;
+      //! X Position Error (North).
+      fp32_t errx;
+      //! Y Position Error (East).
+      fp32_t erry;
+      //! Z Position Error (Down).
+      fp32_t errz;
+      //! X Position Error In Relative Frame (North).
+      fp32_t rferrx;
+      //! Y Position Error In Relative Frame (East).
+      fp32_t rferry;
+      //! Z Position Error In Relative Frame (Down).
+      fp32_t rferrz;
+      //! X Velocity Error In Relative Frame (North).
+      fp32_t rferrvx;
+      //! Y Velocity Error In Relative Frame (East).
+      fp32_t rferrvy;
+      //! Z Velocity Error In Relative Frame (Down).
+      fp32_t rferrvz;
+      //! X Convergence Deviation (North).
+      fp32_t ssx;
+      //! Y Convergence Deviation (East).
+      fp32_t ssy;
+      //! Z Convergence Deviation (Down).
+      fp32_t ssz;
+      //! X Virtual Error (North).
+      fp32_t virterrx;
+      //! Y Virtual Error (East).
+      fp32_t virterry;
+      //! Z Virtual Error (Down).
+      fp32_t virterrz;
+
+      static uint16_t
+      getIdStatic(void)
+      {
+        return 482;
+      }
+
+      RelativeState(void);
+
+      Message*
+      clone(void) const
+      {
+        return new RelativeState(*this);
+      }
+
+      void
+      clear(void);
+
+      bool
+      fieldsEqual(const Message& msg__) const;
+
+      int
+      validate(void) const;
+
+      uint8_t*
+      serializeFields(uint8_t* bfr__) const;
+
+      uint16_t
+      deserializeFields(const uint8_t* bfr__, uint16_t size__);
+
+      uint16_t
+      reverseDeserializeFields(const uint8_t* bfr__, uint16_t size__);
+
+      uint16_t
+      getId(void) const
+      {
+        return RelativeState::getIdStatic();
+      }
+
+      const char*
+      getName(void) const
+      {
+        return "RelativeState";
+      }
+
+      unsigned
+      getFixedSerializationSize(void) const
+      {
+        return 84;
+      }
+
+      unsigned
+      getVariableSerializationSize(void) const
+      {
+        return IMC::getSerializationSize(sid);
+      }
+
+      void
+      fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
+    };
+
+    //! Formation Evaluation Data.
+    class FormationEval: public Message
+    {
+    public:
+      //! Desired X Acceleration (North).
+      fp32_t ax;
+      //! Desired Y Acceleration (East).
+      fp32_t ay;
+      //! Desired Z Acceleration (Down).
+      fp32_t az;
+      //! X Virtual Error (North).
+      fp32_t virterrx;
+      //! Y Virtual Error (East).
+      fp32_t virterry;
+      //! Z Virtual Error (Down).
+      fp32_t virterrz;
+      //! X Sliding Surface Feedback (North).
+      fp32_t surffdbkx;
+      //! Y Sliding Surface Feedback (East).
+      fp32_t surffdbky;
+      //! Z Sliding Surface Feedback (Down).
+      fp32_t surffdbkz;
+      //! X Uncertainty Compensation (North).
+      fp32_t surfunknx;
+      //! Y Uncertainty Compensation (East).
+      fp32_t surfunkny;
+      //! Z Uncertainty Compensation (Down).
+      fp32_t surfunknz;
+      //! X Convergence Deviation (North).
+      fp32_t ssx;
+      //! Y Convergence Deviation (East).
+      fp32_t ssy;
+      //! Z Convergence Deviation (Down).
+      fp32_t ssz;
+      //! Relative State.
+      MessageList<RelativeState> relstate;
+
+      static uint16_t
+      getIdStatic(void)
+      {
+        return 481;
+      }
+
+      FormationEval(void);
+
+      Message*
+      clone(void) const
+      {
+        return new FormationEval(*this);
+      }
+
+      void
+      clear(void);
+
+      bool
+      fieldsEqual(const Message& msg__) const;
+
+      int
+      validate(void) const;
+
+      uint8_t*
+      serializeFields(uint8_t* bfr__) const;
+
+      uint16_t
+      deserializeFields(const uint8_t* bfr__, uint16_t size__);
+
+      uint16_t
+      reverseDeserializeFields(const uint8_t* bfr__, uint16_t size__);
+
+      uint16_t
+      getId(void) const
+      {
+        return FormationEval::getIdStatic();
+      }
+
+      const char*
+      getName(void) const
+      {
+        return "FormationEval";
+      }
+
+      unsigned
+      getFixedSerializationSize(void) const
+      {
+        return 60;
+      }
+
+      unsigned
+      getVariableSerializationSize(void) const
+      {
+        return relstate.getSerializationSize();
       }
 
       void

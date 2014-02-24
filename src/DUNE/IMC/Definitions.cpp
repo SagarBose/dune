@@ -13354,6 +13354,365 @@ namespace DUNE
       }
     }
 
+    RelativeState::RelativeState(void)
+    {
+      m_header.mgid = 482;
+      clear();
+    }
+
+    void
+    RelativeState::clear(void)
+    {
+      sid.clear();
+      dist = 0;
+      err = 0;
+      ctrlimp = 0;
+      reldirx = 0;
+      reldiry = 0;
+      reldirz = 0;
+      errx = 0;
+      erry = 0;
+      errz = 0;
+      rferrx = 0;
+      rferry = 0;
+      rferrz = 0;
+      rferrvx = 0;
+      rferrvy = 0;
+      rferrvz = 0;
+      ssx = 0;
+      ssy = 0;
+      ssz = 0;
+      virterrx = 0;
+      virterry = 0;
+      virterrz = 0;
+    }
+
+    bool
+    RelativeState::fieldsEqual(const Message& msg__) const
+    {
+      const IMC::RelativeState& other__ = dynamic_cast<const RelativeState&>(msg__);
+      if (sid != other__.sid) return false;
+      if (dist != other__.dist) return false;
+      if (err != other__.err) return false;
+      if (ctrlimp != other__.ctrlimp) return false;
+      if (reldirx != other__.reldirx) return false;
+      if (reldiry != other__.reldiry) return false;
+      if (reldirz != other__.reldirz) return false;
+      if (errx != other__.errx) return false;
+      if (erry != other__.erry) return false;
+      if (errz != other__.errz) return false;
+      if (rferrx != other__.rferrx) return false;
+      if (rferry != other__.rferry) return false;
+      if (rferrz != other__.rferrz) return false;
+      if (rferrvx != other__.rferrvx) return false;
+      if (rferrvy != other__.rferrvy) return false;
+      if (rferrvz != other__.rferrvz) return false;
+      if (ssx != other__.ssx) return false;
+      if (ssy != other__.ssy) return false;
+      if (ssz != other__.ssz) return false;
+      if (virterrx != other__.virterrx) return false;
+      if (virterry != other__.virterry) return false;
+      if (virterrz != other__.virterrz) return false;
+      return true;
+    }
+
+    int
+    RelativeState::validate(void) const
+    {
+      return false;
+    }
+
+    uint8_t*
+    RelativeState::serializeFields(uint8_t* bfr__) const
+    {
+      uint8_t* ptr__ = bfr__;
+      ptr__ += IMC::serialize(sid, ptr__);
+      ptr__ += IMC::serialize(dist, ptr__);
+      ptr__ += IMC::serialize(err, ptr__);
+      ptr__ += IMC::serialize(ctrlimp, ptr__);
+      ptr__ += IMC::serialize(reldirx, ptr__);
+      ptr__ += IMC::serialize(reldiry, ptr__);
+      ptr__ += IMC::serialize(reldirz, ptr__);
+      ptr__ += IMC::serialize(errx, ptr__);
+      ptr__ += IMC::serialize(erry, ptr__);
+      ptr__ += IMC::serialize(errz, ptr__);
+      ptr__ += IMC::serialize(rferrx, ptr__);
+      ptr__ += IMC::serialize(rferry, ptr__);
+      ptr__ += IMC::serialize(rferrz, ptr__);
+      ptr__ += IMC::serialize(rferrvx, ptr__);
+      ptr__ += IMC::serialize(rferrvy, ptr__);
+      ptr__ += IMC::serialize(rferrvz, ptr__);
+      ptr__ += IMC::serialize(ssx, ptr__);
+      ptr__ += IMC::serialize(ssy, ptr__);
+      ptr__ += IMC::serialize(ssz, ptr__);
+      ptr__ += IMC::serialize(virterrx, ptr__);
+      ptr__ += IMC::serialize(virterry, ptr__);
+      ptr__ += IMC::serialize(virterrz, ptr__);
+      return ptr__;
+    }
+
+    uint16_t
+    RelativeState::deserializeFields(const uint8_t* bfr__, uint16_t size__)
+    {
+      const uint8_t* start__ = bfr__;
+      bfr__ += IMC::deserialize(sid, bfr__, size__);
+      bfr__ += IMC::deserialize(dist, bfr__, size__);
+      bfr__ += IMC::deserialize(err, bfr__, size__);
+      bfr__ += IMC::deserialize(ctrlimp, bfr__, size__);
+      bfr__ += IMC::deserialize(reldirx, bfr__, size__);
+      bfr__ += IMC::deserialize(reldiry, bfr__, size__);
+      bfr__ += IMC::deserialize(reldirz, bfr__, size__);
+      bfr__ += IMC::deserialize(errx, bfr__, size__);
+      bfr__ += IMC::deserialize(erry, bfr__, size__);
+      bfr__ += IMC::deserialize(errz, bfr__, size__);
+      bfr__ += IMC::deserialize(rferrx, bfr__, size__);
+      bfr__ += IMC::deserialize(rferry, bfr__, size__);
+      bfr__ += IMC::deserialize(rferrz, bfr__, size__);
+      bfr__ += IMC::deserialize(rferrvx, bfr__, size__);
+      bfr__ += IMC::deserialize(rferrvy, bfr__, size__);
+      bfr__ += IMC::deserialize(rferrvz, bfr__, size__);
+      bfr__ += IMC::deserialize(ssx, bfr__, size__);
+      bfr__ += IMC::deserialize(ssy, bfr__, size__);
+      bfr__ += IMC::deserialize(ssz, bfr__, size__);
+      bfr__ += IMC::deserialize(virterrx, bfr__, size__);
+      bfr__ += IMC::deserialize(virterry, bfr__, size__);
+      bfr__ += IMC::deserialize(virterrz, bfr__, size__);
+      return bfr__ - start__;
+    }
+
+    uint16_t
+    RelativeState::reverseDeserializeFields(const uint8_t* bfr__, uint16_t size__)
+    {
+      const uint8_t* start__ = bfr__;
+      bfr__ += IMC::reverseDeserialize(sid, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(dist, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(err, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ctrlimp, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(reldirx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(reldiry, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(reldirz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(errx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(erry, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(errz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferrx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferry, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferrz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferrvx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferrvy, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(rferrvz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssy, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterrx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterry, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterrz, bfr__, size__);
+      return bfr__ - start__;
+    }
+
+    void
+    RelativeState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
+    {
+      IMC::toJSON(os__, "sid", sid, nindent__);
+      IMC::toJSON(os__, "dist", dist, nindent__);
+      IMC::toJSON(os__, "err", err, nindent__);
+      IMC::toJSON(os__, "ctrlimp", ctrlimp, nindent__);
+      IMC::toJSON(os__, "reldirx", reldirx, nindent__);
+      IMC::toJSON(os__, "reldiry", reldiry, nindent__);
+      IMC::toJSON(os__, "reldirz", reldirz, nindent__);
+      IMC::toJSON(os__, "errx", errx, nindent__);
+      IMC::toJSON(os__, "erry", erry, nindent__);
+      IMC::toJSON(os__, "errz", errz, nindent__);
+      IMC::toJSON(os__, "rferrx", rferrx, nindent__);
+      IMC::toJSON(os__, "rferry", rferry, nindent__);
+      IMC::toJSON(os__, "rferrz", rferrz, nindent__);
+      IMC::toJSON(os__, "rferrvx", rferrvx, nindent__);
+      IMC::toJSON(os__, "rferrvy", rferrvy, nindent__);
+      IMC::toJSON(os__, "rferrvz", rferrvz, nindent__);
+      IMC::toJSON(os__, "ssx", ssx, nindent__);
+      IMC::toJSON(os__, "ssy", ssy, nindent__);
+      IMC::toJSON(os__, "ssz", ssz, nindent__);
+      IMC::toJSON(os__, "virterrx", virterrx, nindent__);
+      IMC::toJSON(os__, "virterry", virterry, nindent__);
+      IMC::toJSON(os__, "virterrz", virterrz, nindent__);
+    }
+
+    FormationEval::FormationEval(void)
+    {
+      m_header.mgid = 481;
+      clear();
+      relstate.setParent(this);
+    }
+
+    void
+    FormationEval::clear(void)
+    {
+      ax = 0;
+      ay = 0;
+      az = 0;
+      virterrx = 0;
+      virterry = 0;
+      virterrz = 0;
+      surffdbkx = 0;
+      surffdbky = 0;
+      surffdbkz = 0;
+      surfunknx = 0;
+      surfunkny = 0;
+      surfunknz = 0;
+      ssx = 0;
+      ssy = 0;
+      ssz = 0;
+      relstate.clear();
+    }
+
+    bool
+    FormationEval::fieldsEqual(const Message& msg__) const
+    {
+      const IMC::FormationEval& other__ = dynamic_cast<const FormationEval&>(msg__);
+      if (ax != other__.ax) return false;
+      if (ay != other__.ay) return false;
+      if (az != other__.az) return false;
+      if (virterrx != other__.virterrx) return false;
+      if (virterry != other__.virterry) return false;
+      if (virterrz != other__.virterrz) return false;
+      if (surffdbkx != other__.surffdbkx) return false;
+      if (surffdbky != other__.surffdbky) return false;
+      if (surffdbkz != other__.surffdbkz) return false;
+      if (surfunknx != other__.surfunknx) return false;
+      if (surfunkny != other__.surfunkny) return false;
+      if (surfunknz != other__.surfunknz) return false;
+      if (ssx != other__.ssx) return false;
+      if (ssy != other__.ssy) return false;
+      if (ssz != other__.ssz) return false;
+      if (relstate != other__.relstate) return false;
+      return true;
+    }
+
+    int
+    FormationEval::validate(void) const
+    {
+      return false;
+    }
+
+    uint8_t*
+    FormationEval::serializeFields(uint8_t* bfr__) const
+    {
+      uint8_t* ptr__ = bfr__;
+      ptr__ += IMC::serialize(ax, ptr__);
+      ptr__ += IMC::serialize(ay, ptr__);
+      ptr__ += IMC::serialize(az, ptr__);
+      ptr__ += IMC::serialize(virterrx, ptr__);
+      ptr__ += IMC::serialize(virterry, ptr__);
+      ptr__ += IMC::serialize(virterrz, ptr__);
+      ptr__ += IMC::serialize(surffdbkx, ptr__);
+      ptr__ += IMC::serialize(surffdbky, ptr__);
+      ptr__ += IMC::serialize(surffdbkz, ptr__);
+      ptr__ += IMC::serialize(surfunknx, ptr__);
+      ptr__ += IMC::serialize(surfunkny, ptr__);
+      ptr__ += IMC::serialize(surfunknz, ptr__);
+      ptr__ += IMC::serialize(ssx, ptr__);
+      ptr__ += IMC::serialize(ssy, ptr__);
+      ptr__ += IMC::serialize(ssz, ptr__);
+      ptr__ += relstate.serialize(ptr__);
+      return ptr__;
+    }
+
+    uint16_t
+    FormationEval::deserializeFields(const uint8_t* bfr__, uint16_t size__)
+    {
+      const uint8_t* start__ = bfr__;
+      bfr__ += IMC::deserialize(ax, bfr__, size__);
+      bfr__ += IMC::deserialize(ay, bfr__, size__);
+      bfr__ += IMC::deserialize(az, bfr__, size__);
+      bfr__ += IMC::deserialize(virterrx, bfr__, size__);
+      bfr__ += IMC::deserialize(virterry, bfr__, size__);
+      bfr__ += IMC::deserialize(virterrz, bfr__, size__);
+      bfr__ += IMC::deserialize(surffdbkx, bfr__, size__);
+      bfr__ += IMC::deserialize(surffdbky, bfr__, size__);
+      bfr__ += IMC::deserialize(surffdbkz, bfr__, size__);
+      bfr__ += IMC::deserialize(surfunknx, bfr__, size__);
+      bfr__ += IMC::deserialize(surfunkny, bfr__, size__);
+      bfr__ += IMC::deserialize(surfunknz, bfr__, size__);
+      bfr__ += IMC::deserialize(ssx, bfr__, size__);
+      bfr__ += IMC::deserialize(ssy, bfr__, size__);
+      bfr__ += IMC::deserialize(ssz, bfr__, size__);
+      bfr__ += relstate.deserialize(bfr__, size__);
+      return bfr__ - start__;
+    }
+
+    uint16_t
+    FormationEval::reverseDeserializeFields(const uint8_t* bfr__, uint16_t size__)
+    {
+      const uint8_t* start__ = bfr__;
+      bfr__ += IMC::reverseDeserialize(ax, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ay, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(az, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterrx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterry, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(virterrz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surffdbkx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surffdbky, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surffdbkz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surfunknx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surfunkny, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(surfunknz, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssx, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssy, bfr__, size__);
+      bfr__ += IMC::reverseDeserialize(ssz, bfr__, size__);
+      bfr__ += relstate.reverseDeserialize(bfr__, size__);
+      return bfr__ - start__;
+    }
+
+    void
+    FormationEval::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
+    {
+      IMC::toJSON(os__, "ax", ax, nindent__);
+      IMC::toJSON(os__, "ay", ay, nindent__);
+      IMC::toJSON(os__, "az", az, nindent__);
+      IMC::toJSON(os__, "virterrx", virterrx, nindent__);
+      IMC::toJSON(os__, "virterry", virterry, nindent__);
+      IMC::toJSON(os__, "virterrz", virterrz, nindent__);
+      IMC::toJSON(os__, "surffdbkx", surffdbkx, nindent__);
+      IMC::toJSON(os__, "surffdbky", surffdbky, nindent__);
+      IMC::toJSON(os__, "surffdbkz", surffdbkz, nindent__);
+      IMC::toJSON(os__, "surfunknx", surfunknx, nindent__);
+      IMC::toJSON(os__, "surfunkny", surfunkny, nindent__);
+      IMC::toJSON(os__, "surfunknz", surfunknz, nindent__);
+      IMC::toJSON(os__, "ssx", ssx, nindent__);
+      IMC::toJSON(os__, "ssy", ssy, nindent__);
+      IMC::toJSON(os__, "ssz", ssz, nindent__);
+      relstate.toJSON(os__, "relstate", nindent__);
+    }
+
+    void
+    FormationEval::setTimeStampNested(double value__)
+    {
+      relstate.setTimeStamp(value__);
+    }
+
+    void
+    FormationEval::setSourceNested(uint16_t value__)
+    {
+      relstate.setSource(value__);
+    }
+
+    void
+    FormationEval::setSourceEntityNested(uint8_t value__)
+    {
+      relstate.setSourceEntity(value__);
+    }
+
+    void
+    FormationEval::setDestinationNested(uint16_t value__)
+    {
+      relstate.setDestination(value__);
+    }
+
+    void
+    FormationEval::setDestinationEntityNested(uint8_t value__)
+    {
+      relstate.setDestinationEntity(value__);
+    }
+
     VehicleState::VehicleState(void)
     {
       m_header.mgid = 500;

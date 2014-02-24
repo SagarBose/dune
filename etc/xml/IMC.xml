@@ -4010,6 +4010,19 @@
           fields will be ignored.
         </description>
       </value>
+      <value id="0x20" abbrev="TAKEOFF" name="Takeoff">
+        <description>
+          Indicates that a takeoff should be performed starting at the current
+          position, after the successful takeoff the vehicle should go to the
+          end location.
+        </description>
+      </value>
+      <value id="0x20" abbrev="LAND" name="Land">
+        <description>
+          Indicates that a landing should be performed starting at the current
+          position, the vehicle should touchdown at or before the end location.
+        </description>
+      </value>
     </field>
   </message>
 
