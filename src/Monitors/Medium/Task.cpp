@@ -62,6 +62,8 @@ namespace Monitors
       float airspeed_threshold;
       //! Vehicle type.
       std::string vtype;
+      //! Takeoff monitor entity.
+      std::string takeoff_ent;
     };
 
     //! %Medium task.
@@ -83,11 +85,18 @@ namespace Monitors
       float m_depth;
       //! Vehicle airspeed.
       float m_airspeed;
+      //! Takeoff monitor entity ID.
+      unsigned int m_tkoff_ent;
+      //! Takeoff is successful.
+      bool m_tkoff_ok;
       //! Task arguments.
       Arguments m_args;
 
       Task(const std::string& name, Tasks::Context& ctx):
-        Tasks::Periodic(name, ctx)
+        Tasks::Periodic(name, ctx),
+        m_airspeed(0),
+        m_tkoff_ent(0),
+        m_tkoff_ok(false)
       {
         param("Initialization Time", m_args.init_time)
         .units(Units::Second)
@@ -123,13 +132,17 @@ namespace Monitors
 
         param("Air Speed Threshold", m_args.airspeed_threshold)
         .units(Units::Meter)
-        .defaultValue("12.0")
+        .defaultValue("16.0")
         .description("Minimum air speed necessary to consider a vehicle in air");
 
         param("Vehicle Type", m_args.vtype)
         .defaultValue("UUV")
         .values("UUV, ASV, UAV")
         .description("Type of vehicle");
+
+        param("Takeoff Monitor Label", m_args.takeoff_ent)
+        .defaultValue("Takeoff")
+        .description("Entity Label of Takeoff Monitor");
 
         // GPS validity.
         m_gps_val_bits = (IMC::GpsFix::GFV_VALID_DATE |
@@ -148,6 +161,7 @@ namespace Monitors
         bind<IMC::Salinity>(this);
         bind<IMC::SoundSpeed>(this);
         bind<IMC::IndicatedSpeed>(this);
+        bind<IMC::EntityState>(this);
       }
 
       void
@@ -157,12 +171,25 @@ namespace Monitors
         m_init.setTop(m_args.init_time);
         m_water_status.setTop(m_args.water_timeout);
         m_gps_status.setTop(m_args.gps_timeout);
+        m_tkoff_ent = resolveEntity(m_args.takeoff_ent);
       }
 
       void
       consume(const IMC::EstimatedState* msg)
       {
         m_depth = msg->depth;
+      }
+
+      void
+      consume(const IMC::EntityState* msg)
+      {
+        if (msg->getSourceEntity() != m_tkoff_ent)
+        {
+          (void) msg;
+          return;
+        }
+
+        msg->description.compare("Flying");
       }
 
       void
